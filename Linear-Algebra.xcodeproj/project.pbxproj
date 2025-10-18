@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		36BB27CE2EA3EB0E00F3CF1E /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36BB27CC2EA3EB0E00F3CF1E /* test.cpp */; };
+		36BB27CF2EA3EB0E00F3CF1E /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36BB27CA2EA3EB0E00F3CF1E /* Matrix.cpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		36933DAD2E80643B00DC0F54 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,15 +25,12 @@
 
 /* Begin PBXFileReference section */
 		36933DAF2E80643B00DC0F54 /* Linear-Algebra */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Linear-Algebra"; sourceTree = BUILT_PRODUCTS_DIR; };
+		36BB27C62EA3EB0E00F3CF1E /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		36BB27C72EA3EB0E00F3CF1E /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
+		36BB27C92EA3EB0E00F3CF1E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		36BB27CA2EA3EB0E00F3CF1E /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		36BB27CC2EA3EB0E00F3CF1E /* test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		36933DB12E80643B00DC0F54 /* Linear-Algebra */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Linear-Algebra";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		36933DAC2E80643B00DC0F54 /* Frameworks */ = {
@@ -44,7 +46,11 @@
 		36933DA62E80643A00DC0F54 = {
 			isa = PBXGroup;
 			children = (
-				36933DB12E80643B00DC0F54 /* Linear-Algebra */,
+				36BB27C82EA3EB0E00F3CF1E /* mylib */,
+				36BB27CB2EA3EB0E00F3CF1E /* src */,
+				36BB27CD2EA3EB0E00F3CF1E /* tests */,
+				36BB27C62EA3EB0E00F3CF1E /* LICENSE */,
+				36BB27C92EA3EB0E00F3CF1E /* README.md */,
 				36933DB02E80643B00DC0F54 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +61,30 @@
 				36933DAF2E80643B00DC0F54 /* Linear-Algebra */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		36BB27C82EA3EB0E00F3CF1E /* mylib */ = {
+			isa = PBXGroup;
+			children = (
+				36BB27C72EA3EB0E00F3CF1E /* Matrix.h */,
+			);
+			path = mylib;
+			sourceTree = "<group>";
+		};
+		36BB27CB2EA3EB0E00F3CF1E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				36BB27CA2EA3EB0E00F3CF1E /* Matrix.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		36BB27CD2EA3EB0E00F3CF1E /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				36BB27CC2EA3EB0E00F3CF1E /* test.cpp */,
+			);
+			path = tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +101,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				36933DB12E80643B00DC0F54 /* Linear-Algebra */,
 			);
 			name = "Linear-Algebra";
 			packageProductDependencies = (
@@ -120,6 +147,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36BB27CE2EA3EB0E00F3CF1E /* test.cpp in Sources */,
+				36BB27CF2EA3EB0E00F3CF1E /* Matrix.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +208,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(PROJECT_DIR)";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
