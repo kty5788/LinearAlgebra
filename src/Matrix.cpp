@@ -1,40 +1,36 @@
 #include <mylib/Matrix.h>
 
 matrix::matrix() {
+    std::vector<std::vector<double>> data;
     row = 0;
     col = 0;
-    data = nullptr;
 }
     
 matrix::~matrix() {
-    if (data != nullptr) {
-        for (int i = 0; i < row; i++) {
-            delete[] data[i];
-        }
-        delete[] data;
-    }
+    data.clear();
 }
     
 matrix::matrix(size_t r, size_t c) {
     row = r;
     col = c;
-    data = new double*[row];
-    for (int i = 0; i < row; i++) {
-        data[i] = new double[col];
-        for (int j = 0; j < col; j++) {
-            data[i][j] = 0;
-        }
+    
+    data.resize(row);
+    for (size_t i = 0; i < row; i++) {
+        data[i].resize(col,0);
     }
 }
     
 matrix::matrix(std::initializer_list<std::initializer_list<double>> values) {
     row = values.size();
     col = values.begin()->size();
-    data = new double*[row];
+    
+    data.resize(row);
+    for (size_t i = 0; i < row; i++) {
+        data[i].resize(col,0);
+    }
     
     int i = 0;
     for (auto& row_list : values) {
-        data[i] = new double[col];
         int j = 0;
         for (auto& val : row_list) {
             data[i][j] = val;
@@ -47,17 +43,10 @@ matrix::matrix(std::initializer_list<std::initializer_list<double>> values) {
 matrix& matrix::operator=(const matrix& other) {
     if (this == &other) return *this;
     
-    for (int i = 0; i < row; i++) {
-        delete[] data[i];
-    }
-    delete[] data;
-    
     row = other.row;
     col = other.col;
     
-    data = new double*[row];
     for (int i = 0; i < row; i++) {
-        data[i] = new double[col];
         for (int j = 0; j < col; j++) {
             data[i][j] = other.data[i][j];
         }
@@ -78,19 +67,16 @@ matrix& matrix::operator=(std::initializer_list<std::initializer_list<double>> v
         r++;
     }
     
-    if (data != nullptr) {
-        for (int i = 0; i < row; i++)
-            delete[] data[i];
-        delete[] data;
-    }
-    
     row = values.size();
     col = values.begin()->size();
     
-    data = new double*[row];
+    data.resize(row);
+    for (size_t i = 0; i < row; i++) {
+        data[i].resize(col,0);
+    }
+    
     int i = 0;
     for (auto& row_list : values) {
-        data[i] = new double[col];
         int j = 0;
         for (auto& val : row_list) {
             data[i][j] = val;
@@ -112,7 +98,6 @@ matrix matrix::operator+(const matrix& other) const {
             result.data[i][j] = data[i][j] + other.data[i][j];
         }
     }
-    
     return result;
 }
     
@@ -140,8 +125,7 @@ matrix matrix::operator*(double scalar) const {
     }
     return result;
 }
-    
-    
+
 void matrix::size() const {
     std::cout << row << " * " << col << '\n';
 }
@@ -154,6 +138,36 @@ void matrix::print() const {
         std::cout << '\n';
     }
     std::cout << '\n';
+}
+
+size_t matrix::getRow() const {
+    return row;
+}
+
+size_t matrix::getCol() const {
+    return col;
+}
+
+double matrix::getData(size_t r, size_t c) const {
+    return data[r][c];
+}
+
+double dot(const matrix& m1, const matrix& m2) {
+    if (m1.getRow() != 1 || m2.getRow() != 1) {
+        throw std::runtime_error("dot product can be used in vector, not matrix");
+    }
+    else if (m1.getCol() != m2.getCol()) {
+        throw std::runtime_error("dot: size mismatch");
+    }
+    else {
+        int d = 0;
+        for (int i = 0; i < m1.getCol(); i++) {
+            d += m1.getData(0, i) * m2.getData(0, i);
+        }
+        return d;
+    }
+    
+    return 0;
 }
 
 matrix operator*(double scalar, const matrix& m) {
