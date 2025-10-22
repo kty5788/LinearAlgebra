@@ -37,7 +37,7 @@ public:
     
 };
 
-double dot(const matrix& m1, const matrix& m2);
+
 matrix operator*(double scalar, const matrix& m);
 
 

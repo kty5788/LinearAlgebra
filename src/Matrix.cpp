@@ -132,10 +132,11 @@ void matrix::size() const {
     
 void matrix::print() const {
     for (int i = 0; i < row; i++) {
+        std::cout << "[";
         for (int j = 0; j < col; j++) {
-            std::cout << data[i][j] << " ";
+            std::cout << " " << data[i][j];
         }
-        std::cout << '\n';
+        std::cout << " ]" << '\n';
     }
     std::cout << '\n';
 }
@@ -150,24 +151,6 @@ size_t matrix::getCol() const {
 
 double matrix::getData(size_t r, size_t c) const {
     return data[r][c];
-}
-
-double dot(const matrix& m1, const matrix& m2) {
-    if (m1.getRow() != 1 || m2.getRow() != 1) {
-        throw std::runtime_error("dot product can be used in vector, not matrix");
-    }
-    else if (m1.getCol() != m2.getCol()) {
-        throw std::runtime_error("dot: size mismatch");
-    }
-    else {
-        int d = 0;
-        for (int i = 0; i < m1.getCol(); i++) {
-            d += m1.getData(0, i) * m2.getData(0, i);
-        }
-        return d;
-    }
-    
-    return 0;
 }
 
 matrix operator*(double scalar, const matrix& m) {
