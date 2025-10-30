@@ -35,8 +35,8 @@ public:
     void size() const;
     void print() const;
     
+    friend matrix GaussianElimination(matrix& m);
 };
-
 
 matrix operator*(double scalar, const matrix& m);
 

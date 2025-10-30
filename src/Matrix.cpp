@@ -156,3 +156,48 @@ double matrix::getData(size_t r, size_t c) const {
 matrix operator*(double scalar, const matrix& m) {
     return m * scalar;
 }
+
+matrix GaussianElimination(matrix& m) {
+    size_t r = m.getRow();
+    size_t c = m.getCol();
+    
+    matrix result(r,c);
+    result = m;
+    
+    
+    /*
+    size_t changed_time = 0;
+    for (size_t i = 0; i < r; i++) {
+        if (result.data[i][changed_time] == 0) {
+            // 기본 행연산 row operation -> maybe This part might be a void function.
+            for (size_t col = 0; col < c; col++) {
+                double temp = result.data[i][col];
+                result.data[i][col] = result.data[changed_time][col];
+                result.data[changed_time][col] = temp;
+            }
+        }
+    }
+     */
+    
+    size_t standard = 0;
+    double mul;
+    while (standard < c) {
+        for (size_t i = standard; i < r; i++) {
+            if (i != standard) {
+                if (result.data[i][standard] == 0) {
+                    mul = 0;
+                }
+                else {
+                    mul = result.data[i][standard] / result.data[standard][standard];
+                }
+                
+                for (size_t j = standard; j < c; j++) {
+                    result.data[i][j] = result.data[i][j] - mul * result.data[standard][j];
+                }
+            }
+        }
+        standard++;
+    }
+    
+    return result;
+}

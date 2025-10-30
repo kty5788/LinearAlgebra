@@ -3,26 +3,16 @@
 #include <mylib/Vector.h>
 
 int main() {
-    matrix A{{1,2,3},{4,5,6}};
-    matrix B{{1,1,2}};
-    matrix C{{1,2,3}};
+    matrix A{{1,2,3,4},{2,3,4,5},{3,4,5,6}};
+    matrix B{{2,3,4,5},{3,4,5,6},{1,2,3,4}};
+    //matrix B{{0,0,0,0},{1,2,3,4},{5,6,7,8}};
     
     
-    double x = dot(B,C);
-    std::cout << x << '\n';
-    std::cout << norm(B) << '\n';
-    
-    /*
-    C = normalize(C);
-    C.print();
-     */
+    A = GaussianElimination(A);
+    B = GaussianElimination(B);
     
     A.print();
-    
-    std::cout << dist(B,C) << '\n';
-    
-    std::cout << deg(B,C) << '\n';
-    
+    B.print();
     
     return 0;
 }
