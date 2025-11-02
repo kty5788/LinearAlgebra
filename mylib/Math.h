@@ -4,7 +4,8 @@
 
 #include <iostream>
 
-double sqrt(double k, double prev_value, int iter=1);
+double sqrt(double k, double prev_value);
+double cmin(double A, double B);
 
 #endif
 

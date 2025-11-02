@@ -4,9 +4,7 @@
 
 int main() {
     matrix A{{1,2,3,4},{2,3,4,5},{3,4,5,6}};
-    matrix B{{2,3,4,5},{3,4,5,6},{1,2,3,4}};
-    //matrix B{{0,0,0,0},{1,2,3,4},{5,6,7,8}};
-    
+    matrix B{{0,0,0,0},{1,0,3,4},{5,6,7,8}};
     
     A = GaussianElimination(A);
     B = GaussianElimination(B);

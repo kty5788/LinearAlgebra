@@ -1,14 +1,20 @@
 #include <mylib/Math.h>
 
-double sqrt(double k, double prev_value, int iter) {
-    if (iter == 1) prev_value = k;
-    if (iter != 7) {
-        sqrt(k, (prev_value + (k/prev_value))/2, iter+1);
+double sqrt(double k, double prev_value) {
+    int iter = 7;
+    while (iter > 0) {
+        prev_value = (prev_value + (k/prev_value))/2;
+        iter--;
+    }
+    return prev_value;
+}
+
+double cmin(double A, double B) {
+    if (A > B) {
+        return B;
     }
     else {
-        k = prev_value;
-        return k;
+        return A;
     }
-    return -1;
 }
 

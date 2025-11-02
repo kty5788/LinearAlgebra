@@ -157,6 +157,23 @@ matrix operator*(double scalar, const matrix& m) {
     return m * scalar;
 }
 
+size_t matrix::FindNonZeroRow(matrix& m, size_t pivot) {
+    for (size_t i = pivot; i < m.row; i++) {
+        if (i != pivot || m.data[i][pivot] != 0) {
+            return i;
+        }
+    }
+    return pivot;
+}
+
+void swapRow(matrix& m, size_t r1, size_t r2) {
+    for (size_t col = 0; col < m.col; col++) {
+        double temp = m.data[r1][col];
+        m.data[r1][col] = m.data[r2][col];
+        m.data[r2][col] = temp;
+    }
+}
+
 matrix GaussianElimination(matrix& m) {
     size_t r = m.getRow();
     size_t c = m.getCol();
@@ -164,39 +181,26 @@ matrix GaussianElimination(matrix& m) {
     matrix result(r,c);
     result = m;
     
-    
-    /*
-    size_t changed_time = 0;
-    for (size_t i = 0; i < r; i++) {
-        if (result.data[i][changed_time] == 0) {
-            // 기본 행연산 row operation -> maybe This part might be a void function.
-            for (size_t col = 0; col < c; col++) {
-                double temp = result.data[i][col];
-                result.data[i][col] = result.data[changed_time][col];
-                result.data[changed_time][col] = temp;
-            }
-        }
-    }
-     */
-    
-    size_t standard = 0;
+    size_t pivot = 0;
     double mul;
-    while (standard < c) {
-        for (size_t i = standard; i < r; i++) {
-            if (i != standard) {
-                if (result.data[i][standard] == 0) {
+    while (pivot < cmin(r,c)) {
+        if (result.data[pivot][pivot] == 0) swapRow(result, result.FindNonZeroRow(result, pivot), pivot);
+        
+        for (size_t i = pivot; i < r; i++) {
+            if (i != pivot) {
+                if (result.data[i][pivot] == 0) {
                     mul = 0;
                 }
                 else {
-                    mul = result.data[i][standard] / result.data[standard][standard];
+                    mul = result.data[i][pivot] / result.data[pivot][pivot];
                 }
                 
-                for (size_t j = standard; j < c; j++) {
-                    result.data[i][j] = result.data[i][j] - mul * result.data[standard][j];
+                for (size_t j = pivot; j < c; j++) {
+                    result.data[i][j] = result.data[i][j] - mul * result.data[pivot][j];
                 }
             }
         }
-        standard++;
+        pivot++;
     }
     
     return result;

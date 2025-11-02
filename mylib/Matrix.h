@@ -9,6 +9,7 @@
 #define Matrix_h
 
 #include <iostream>
+#include <mylib/Math.h>
 #include <vector>
 #include <stdexcept>
 #include <initializer_list>
@@ -34,9 +35,13 @@ public:
     double getData(size_t r, size_t c) const;
     void size() const;
     void print() const;
+    size_t FindNonZeroRow(matrix& m, size_t pivot);
     
+    friend void swapRow(matrix& m, size_t i, size_t j);
     friend matrix GaussianElimination(matrix& m);
 };
+
+
 
 matrix operator*(double scalar, const matrix& m);
 

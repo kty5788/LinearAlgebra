@@ -1,5 +1,5 @@
-
 #include <mylib/Vector.h>
+#include <mylib/Math.h>
 
 double dist(const matrix& m1, const matrix& m2) {
     return norm(m1-m2);
@@ -20,7 +20,7 @@ double norm(const matrix& m) {
             d += m.getData(0, i) * m.getData(0, i);
         }
         
-        return sqrt(d);
+        return sqrt(d,1);
     }
 }
 
